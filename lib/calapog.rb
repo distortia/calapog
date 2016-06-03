@@ -21,6 +21,9 @@ module Calapog
 			puts "Generating: features/ios/pages/#{Utility.unshare(Utility.underscore(name))}"
 			# class_name, file_name, shared_class_name
 			Template.ios_template(Utility.unshare(name), Utility.unshare(Utility.underscore(name)), name)
+			puts "Generating: data/#{Utility.unshare(Utility.underscore(name))}"
+			# file_name
+			Template.yaml_template(Utility.unshare(Utility.underscore(name)))
 		end
 	end
 
@@ -55,6 +58,12 @@ module Calapog
 		def self.ios_template(class_name, file_name, shared_class_name)
 			File.open("features/ios/pages/#{file_name}.rb", "w+") do |file|
 				file.write "class IOS::#{class_name} < #{shared_class_name}\n  include Calabash::IOS\n\n  private\nend"
+			end
+		end
+
+		def self.yaml_template(file_name)
+			File.open("data/#{file_name}.yml", "w+") do |file|
+				file.write "main_content:"
 			end
 		end
 	end
