@@ -11,19 +11,26 @@ module Calapog
 		shared_class_page => /features/pages/\n
 		class_page => /features/android/pages & /features/ios/pages\n
 		GENERATE
-		def generate(name)
-			puts "Generating: features/pages/#{name}"
-			# class_name, file_name, data_file_name
-			Template.shared_template(name, Utility.underscore(name), Utility.unshare(Utility.underscore(name)))
-			puts "Generating: features/android/pages/#{Utility.unshare(Utility.underscore(name))}"
-			# class_name, file_name, shared_class_name
-			Template.android_template(Utility.unshare(name), Utility.unshare(Utility.underscore(name)), name)
-			puts "Generating: features/ios/pages/#{Utility.unshare(Utility.underscore(name))}"
-			# class_name, file_name, shared_class_name
-			Template.ios_template(Utility.unshare(name), Utility.unshare(Utility.underscore(name)), name)
-			puts "Generating: data/#{Utility.unshare(Utility.underscore(name))}"
+		def generate(parent_class)
+			child_class = Utility.unshare(parent_class)
+			parent_file_name = Utility.underscore(parent_class)
+			child_file_name = Utility.unshare(Utility.underscore(parent_class))
+
+			puts "Generating: features/pages/#{parent_file_name}"
+			# parent_class, file_name, data_file_name(which is the child file name)
+			Template.shared_template(parent_class, parent_file_name, child_file_name)
+
+			puts "Generating: features/android/pages/#{child_file_name}"
+			# class_name, file_name, parent_class
+			Template.android_template(child_class, child_file_name, parent_class)
+
+			puts "Generating: features/ios/pages/#{child_file_name}"
+			# class_name, file_name, parent_class
+			Template.ios_template(child_class, child_file_name, parent_class)
+
+			puts "Generating: data/#{child_file_name}"
 			# file_name
-			Template.yaml_template(Utility.unshare(Utility.underscore(name)))
+			Template.yaml_template(child_file_name)
 		end
 	end
 
