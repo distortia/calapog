@@ -6,10 +6,10 @@ module Calapog
 	class Main < Thor
 		desc "generate SharedClassPage", "This will generate the appropriate Calabash page object pages"
 		long_desc <<-GENERATE
-		'generate SharedClassPage` scaffolds the 3 seperate pages required for cross platform calabash page object play.
-		Default directory structure is:
-		shared_class_page => /features/pages/
-		class_page => /features/android/pages & /features/ios/pages
+		`generate SharedClassPage` scaffolds the 3 seperate pages required for cross platform calabash page object play.\n
+		Default directory structure is:\n
+		shared_class_page => /features/pages/\n
+		class_page => /features/android/pages & /features/ios/pages\n
 		GENERATE
 		def generate(name)
 			puts "Generating: features/pages/#{name}"
