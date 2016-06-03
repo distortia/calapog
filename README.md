@@ -22,13 +22,44 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+`calapog generate SharedClassPage` will generate the following scaffold(replace Class with the name of your page):
 
-## Development
+* `features/pages/shared_class_name.rb` with the following code: 
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
+class SharedClassPage < CommonPage
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+  def trait
+
+  end
+
+  def page_data_file
+    'class_page'
+  end
+
+  private
+end
+```
+
+* `features/android/pages/class_name.rb` with the following code:
+
+```ruby
+class Android::ClassPage < SharedClassPage
+  include Calabash::Android
+
+  private
+end
+```
+
+* `features/ios/pages/class_name.rb` with the following code:
+
+```ruby
+class IOS::ClassPage < SharedClassPage
+  include Calabash::IOS
+
+  private
+end
+```
 
 ## Contributing
 
